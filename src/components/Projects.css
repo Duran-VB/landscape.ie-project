@@ -1,0 +1,130 @@
+.projects__head {
+  display: grid;
+  gap: 28px;
+  margin-bottom: clamp(56px, 8vw, 140px);
+}
+
+.projects__count {
+  display: grid;
+  gap: 14px;
+  align-content: end;
+}
+
+.projects__note {
+  color: var(--ink-2);
+  max-width: 22em;
+}
+
+.projects__list {
+  display: grid;
+  gap: clamp(88px, 13vw, 220px);
+}
+
+.project {
+  display: grid;
+  gap: 28px;
+}
+
+.project__photo {
+  aspect-ratio: 4 / 5;
+}
+
+.project__text {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.project__index {
+  color: var(--ink-3);
+}
+
+.project__summary {
+  font-size: var(--fs-s);
+  line-height: 1.05;
+  color: var(--sage-2);
+}
+
+.project__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+@media (min-width: 700px) {
+  .project__photo {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (min-width: 900px) {
+  .projects__head {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+
+  .project {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(16px, 2vw, 32px);
+    row-gap: 0;
+  }
+
+  /* 01 — full-bleed feature with the title set over the image */
+  .project--full .project__photo {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    aspect-ratio: 16 / 9;
+    margin-inline: calc(var(--gutter) * -0.5);
+  }
+
+  .project--full .project__text {
+    grid-column: 1 / 9;
+    grid-row: 1;
+    align-self: end;
+    z-index: 1;
+    padding: 0 0 clamp(28px, 3.4vw, 56px) clamp(16px, 2.6vw, 48px);
+    color: var(--ivory);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .project--full .project__photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(12, 14, 11, 0.62) 0%, rgba(12, 14, 11, 0) 52%);
+    pointer-events: none;
+  }
+
+  .project--full .project__index,
+  .project--full .project__summary {
+    color: rgba(244, 240, 231, 0.82);
+  }
+
+  /* 02 — text left, tall image right */
+  .project--right .project__text {
+    grid-column: 1 / 5;
+    grid-row: 1;
+    align-self: start;
+    position: sticky;
+    top: 140px;
+  }
+
+  .project--right .project__photo {
+    grid-column: 6 / -1;
+    grid-row: 1;
+    aspect-ratio: 5 / 6;
+  }
+
+  /* 03 — wide image left, text right */
+  .project--left .project__photo {
+    grid-column: 1 / 9;
+    aspect-ratio: 5 / 4;
+  }
+
+  .project--left .project__text {
+    grid-column: 9 / -1;
+    align-self: end;
+    padding-left: clamp(0px, 1.4vw, 24px);
+  }
+}

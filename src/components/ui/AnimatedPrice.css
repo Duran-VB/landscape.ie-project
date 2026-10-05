@@ -1,0 +1,48 @@
+.price {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.price__digits {
+  display: inline-flex;
+  align-items: flex-end;
+  transition: color 0.9s var(--ease-out);
+}
+
+.price__digits.is-changed {
+  color: var(--forest);
+  transition-duration: 0.2s;
+}
+
+.price__sym {
+  display: inline-block;
+  height: 1em;
+  line-height: 1;
+}
+
+.price__digit {
+  display: inline-block;
+  position: relative;
+  width: 0.45em;
+  height: 1em;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1;
+}
+
+.price__strip {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.price__strip > span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}

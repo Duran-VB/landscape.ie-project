@@ -1,0 +1,98 @@
+.manifesto {
+  position: relative;
+  height: 340vh;
+  background: var(--charcoal);
+}
+
+.manifesto__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.manifesto__frame {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+}
+
+.manifesto__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.manifesto__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background:
+    radial-gradient(ellipse at center, rgba(12, 14, 11, 0.18) 0%, rgba(12, 14, 11, 0.55) 100%),
+    linear-gradient(to top, rgba(12, 14, 11, 0.5), rgba(12, 14, 11, 0) 45%);
+}
+
+.manifesto__words {
+  position: relative;
+  z-index: 6;
+  display: grid;
+  width: 100%;
+  margin: 0;
+  padding-inline: var(--gutter);
+  text-align: center;
+}
+
+.manifesto__word {
+  grid-area: 1 / 1;
+  display: block;
+  color: var(--ivory);
+  will-change: transform, opacity;
+}
+
+.manifesto__word.is-italic {
+  font-style: italic;
+}
+
+.manifesto__foot {
+  position: absolute;
+  z-index: 6;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: 0 var(--gutter) clamp(24px, 3.4vw, 44px);
+}
+
+.manifesto__steps {
+  display: flex;
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.manifesto__step {
+  display: grid;
+  gap: 10px;
+  color: var(--on-dark-2);
+}
+
+.manifesto__bar {
+  display: block;
+  width: clamp(44px, 7vw, 120px);
+  height: 1px;
+  background: rgba(244, 240, 231, 0.25);
+}
+
+.manifesto__bar > span {
+  display: block;
+  height: 100%;
+  background: var(--ivory);
+  transform-origin: left;
+}

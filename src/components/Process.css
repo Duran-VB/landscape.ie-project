@@ -1,0 +1,143 @@
+.process__eyebrow {
+  margin-bottom: 28px;
+  color: var(--on-dark-2);
+}
+
+.process__intro .lead {
+  margin-top: 28px;
+}
+
+.process__num {
+  display: block;
+  font-size: clamp(1.6rem, 2.2vw, 2.4rem);
+  line-height: 1;
+  color: var(--sage);
+}
+
+.process__title {
+  margin-top: 14px;
+}
+
+.process__copy {
+  margin-top: 18px;
+  max-width: 18em;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--on-dark-2);
+}
+
+/* Horizontal (desktop) */
+.process--horizontal {
+  position: relative;
+}
+
+.process__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.process__track {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  width: max-content;
+  will-change: transform;
+}
+
+.process--horizontal .process__intro {
+  width: min(44vw, 720px);
+  flex: none;
+  align-self: center;
+  padding: 0 4vw 0 max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+}
+
+.process__panel {
+  position: relative;
+  flex: none;
+  width: min(58vw, 1040px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 3vw;
+  padding: 14vh 3.4vw;
+  border-left: 1px solid var(--line-dark);
+}
+
+/* The title is allowed to run over the photo — on purpose, editorial-style. */
+.process__panel-text {
+  position: relative;
+  z-index: 2;
+  align-self: start;
+  text-shadow: 0 2px 30px rgba(12, 14, 11, 0.45);
+}
+
+.process__panel .process__photo {
+  position: relative;
+  z-index: 1;
+}
+
+.process__panel.is-low .process__panel-text {
+  align-self: end;
+}
+
+.process__panel .process__photo {
+  width: 100%;
+  height: 62vh;
+  max-height: 640px;
+}
+
+.process__panel.is-low .process__photo {
+  height: 52vh;
+  align-self: start;
+}
+
+.process__end {
+  flex: none;
+  width: 6vw;
+}
+
+.process__progress {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 40px;
+  height: 1px;
+  background: rgba(244, 240, 231, 0.18);
+}
+
+.process__progress span {
+  display: block;
+  height: 100%;
+  background: var(--ivory);
+  transform-origin: left;
+}
+
+/* Vertical (mobile / tablet) */
+.process__list {
+  display: grid;
+  gap: clamp(64px, 10vw, 110px);
+  margin-top: clamp(56px, 9vw, 96px);
+}
+
+.process__item {
+  display: grid;
+  gap: 24px;
+}
+
+.process--vertical .process__photo {
+  aspect-ratio: 4 / 3;
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .process__item {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 32px;
+  }
+
+  .process__list li:nth-child(even) .process__photo {
+    order: 2;
+  }
+}
