@@ -3,6 +3,8 @@ import { footerLinks, site } from '../data/site'
 import { ArrowUp } from './ui/Icons'
 import './Footer.css'
 
+const YEAR = new Date().getFullYear()
+
 export function Footer() {
   return (
     <footer className="footer bg-charcoal on-dark">
@@ -60,7 +62,7 @@ export function Footer() {
 
         <div className="footer__bottom">
           <span>
-            © {new Date().getFullYear()} {site.name}
+            © {YEAR} {site.name}
           </span>
           <span>Concept demo — frontend only</span>
           <a href="#top" className="footer__top-link">

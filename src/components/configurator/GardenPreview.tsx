@@ -3,7 +3,8 @@ import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } 
 import { SIZE_DIMENSIONS, formatDelta, labelFor, type Selections } from '../../data/pricing'
 import { useTween } from '../../hooks/useTween'
 import { Moon, Sun } from '../ui/Icons'
-import { GardenScene, layoutFor } from './scene/GardenScene'
+import { GardenScene } from './scene/GardenScene'
+import { layoutFor } from './scene/layout'
 
 export type Change = { id: number; text: string; delta?: number }
 
@@ -39,14 +40,14 @@ export function GardenPreview({ selections, evening, onEveningChange, change, cl
     tiltY.set(0)
   }
 
-  // Toast that names the change that just happened.
-  const [toast, setToast] = useState<Change | null>(null)
+  // Toast naming the change that just happened; it hides itself after a moment.
+  const [dismissedId, setDismissedId] = useState<number | null>(null)
   useEffect(() => {
     if (!change) return
-    setToast(change)
-    const t = window.setTimeout(() => setToast(null), 2200)
+    const t = window.setTimeout(() => setDismissedId(change.id), 2200)
     return () => window.clearTimeout(t)
   }, [change])
+  const toast = change && change.id !== dismissedId ? change : null
 
   const dims = selections.dimensions ?? SIZE_DIMENSIONS[selections.size]
   const area = Math.round(dims.length * dims.width)

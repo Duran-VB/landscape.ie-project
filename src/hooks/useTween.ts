@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
 
 /** Smoothly tweens a flat object of numbers towards `target`.
- *  Used to reshape the garden preview without a heavy animation system. */
+ *  Used to reshape the garden preview without a heavy animation system.
+ *  With `duration` 0 (reduced motion) it simply returns the target. */
 export function useTween<T extends Record<string, number>>(target: T, duration = 800): T {
   const [value, setValue] = useState(target)
   const current = useRef(target)
@@ -11,12 +12,11 @@ export function useTween<T extends Record<string, number>>(target: T, duration =
 
   useEffect(() => {
     const to = JSON.parse(key) as T
-    const from = current.current
     if (duration <= 0) {
       current.current = to
-      setValue(to)
       return
     }
+    const from = current.current
     const start = performance.now()
     let frame = requestAnimationFrame(function tick(now) {
       const t = Math.min(1, (now - start) / duration)
@@ -32,5 +32,5 @@ export function useTween<T extends Record<string, number>>(target: T, duration =
     return () => cancelAnimationFrame(frame)
   }, [key, duration])
 
-  return value
+  return duration <= 0 ? target : value
 }

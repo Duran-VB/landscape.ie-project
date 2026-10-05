@@ -3,7 +3,8 @@ import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, useVe
 import { services } from '../data/content'
 import { useCanHover } from '../hooks/useMediaQuery'
 import { ArrowUpRight, Plus } from './ui/Icons'
-import { EASE_OUT, MaskLines, Reveal } from './ui/Motion'
+import { MaskLines, Reveal } from './ui/Motion'
+import { EASE_OUT } from './ui/easing'
 import './Services.css'
 
 /** Editorial service list. Desktop: hovering a row expands it and a related
@@ -19,10 +20,18 @@ export function Services() {
   const springY = useSpring(y, { stiffness: 170, damping: 22, mass: 0.5 })
   const rotate = useTransform(useVelocity(springX), [-1600, 1600], [-7, 7], { clamp: true })
 
+  const floatRef = useRef<HTMLDivElement>(null)
+
+  // Follow the cursor, but keep the preview clear of the description column
+  // so the row being read is never covered.
   const onPointerMove = (e: PointerEvent) => {
-    const rect = listRef.current?.getBoundingClientRect()
-    if (!rect) return
-    x.set(e.clientX - rect.left)
+    const wrap = listRef.current
+    if (!wrap) return
+    const rect = wrap.getBoundingClientRect()
+    const half = (floatRef.current?.offsetWidth ?? 300) / 2
+    const desc = wrap.querySelector('.service__desc')?.getBoundingClientRect()
+    const maxX = desc ? desc.left - rect.left - half - 32 : rect.width - half
+    x.set(Math.max(half, Math.min(e.clientX - rect.left, maxX)))
     y.set(e.clientY - rect.top)
   }
 
@@ -96,6 +105,7 @@ export function Services() {
 
           {canHover && (
             <motion.div
+              ref={floatRef}
               className="services__float"
               style={{ x: springX, y: springY, rotate }}
               animate={{ opacity: active === null ? 0 : 1, scale: active === null ? 0.82 : 1 }}

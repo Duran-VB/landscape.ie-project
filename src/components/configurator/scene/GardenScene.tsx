@@ -1,34 +1,10 @@
 import { useId, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { SIZE_DIMENSIONS, type Selections } from '../../../data/pricing'
+import type { Selections } from '../../../data/pricing'
+import type { SceneLayout } from './layout'
 import { GROUND_RX, GROUND_RY, ISO_X, dusk, makeProjector, mix, pts, rand, shade, tint } from './iso'
-import {
-  Bollard,
-  Box,
-  FLOWERS,
-  FeatureTree,
-  Flat,
-  FoliageDefs,
-  Grass,
-  GroundEllipse,
-  Perennial,
-  Shadow,
-  Shrub,
-  Tree,
-  faces,
-  type Ctx,
-  type Tone,
-} from './parts'
-
-/** Continuous layout values — tweened so the garden reshapes smoothly. */
-export type SceneLayout = {
-  L: number // garden length, away from the house (m)
-  W: number // garden width, along the house (m)
-  pd: number // patio depth
-  pz: number // patio height (raised terrace)
-  bd: number // back border depth
-  pathStart: number
-}
+import { FLOWERS, faces, type Ctx, type Tone } from './palette'
+import { Bollard, Box, FeatureTree, Flat, FoliageDefs, Grass, GroundEllipse, Perennial, Shadow, Shrub, Tree } from './parts'
 
 const S = 44 // pixels per metre
 const T = 0.6 // depth of the cut-away ground slab
@@ -38,18 +14,6 @@ const FLOOR = 0.62
 const EASE = [0.22, 1, 0.36, 1] as const
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v))
-
-/** Where everything should be for a given set of selections. */
-export function layoutFor(s: Selections): SceneLayout {
-  const dims = s.dimensions ?? SIZE_DIMENSIONS[s.size]
-  const L = clamp(dims.length, 5, 15)
-  const W = clamp(dims.width, 4.5, 10)
-  const pd = s.patio === 'premium' ? clamp(L * 0.34, 3, 4.8) : clamp(L * 0.27, 2.4, 3.6)
-  const pz = s.patio === 'premium' ? 0.28 : 0.06
-  const bd = s.planting === 'minimal' ? 0 : s.planting === 'standard' ? 1.15 : 1.7
-  const pathStart = s.patio === 'none' ? 1.3 : pd + 0.4
-  return { L, W, pd, pz, bd, pathStart }
-}
 
 const COL = {
   lawn: '#97a670',

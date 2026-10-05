@@ -95,6 +95,7 @@
 }
 
 .nav__actions {
+  grid-column: 3;
   justify-self: end;
   display: flex;
   align-items: center;
@@ -212,6 +213,10 @@
   gap: 10px;
   color: var(--on-dark-2);
   font-size: 0.9rem;
+}
+
+.menu__rating > span {
+  color: #e9c46a;
 }
 
 @media (min-width: 1024px) {

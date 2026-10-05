@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { formatEuro } from '../../data/pricing'
 import './AnimatedPrice.css'
@@ -12,20 +12,21 @@ export function AnimatedPrice({ value, className = '' }: { value: number; classN
   const formatted = formatEuro(value)
   const chars = formatted.split('')
 
+  // Briefly warm the digits towards forest green whenever the total changes.
+  const digits = useRef<HTMLSpanElement>(null)
   const previous = useRef(value)
-  const [changed, setChanged] = useState(false)
   useEffect(() => {
     if (previous.current === value) return
     previous.current = value
-    setChanged(true)
-    const t = window.setTimeout(() => setChanged(false), 700)
-    return () => window.clearTimeout(t)
-  }, [value])
+    const el = digits.current
+    if (!el || reduce) return
+    el.animate([{ color: '#2c5a40' }, { color: getComputedStyle(el).color }], { duration: 1100, easing: 'ease-out' })
+  }, [value, reduce])
 
   return (
     <span className={`price ${className}`}>
       <span className="visually-hidden">{formatted}</span>
-      <span className={`price__digits ${changed ? 'is-changed' : ''}`} aria-hidden>
+      <span ref={digits} className="price__digits" aria-hidden>
         {chars.map((char, i) => {
           // Key from the right so units stay put when the number grows.
           const key = chars.length - i

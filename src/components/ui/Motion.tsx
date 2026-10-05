@@ -1,11 +1,10 @@
 import { useRef, type ReactNode } from 'react'
 import { motion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { EASE_EXPO, EASE_OUT } from './easing'
 
 // Shared, restrained motion primitives. Each one is used sparingly — the
 // animation should support the story, not decorate every element.
 
-export const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1]
-export const EASE_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 /** Fade + lift when the element scrolls into view. */
 export function Reveal({

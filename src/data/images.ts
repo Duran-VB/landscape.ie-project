@@ -53,7 +53,7 @@ export const photos = {
   before: photo(before, 'An overgrown, fenced back garden'),
   after: photo(after, 'A back garden with a timber fence, lawn and planted borders'),
   projectBack: photo(projectBack, 'Timber fence with trellis and gate above a sandstone patio'),
-  projectFront: photo(projectFront, 'Block-paved driveway, lawn and young tree in front of a house'),
+  projectFront: photo(projectFront, 'Block-paved driveway, lawn and young tree in front of a house', '30% 85%'),
   projectTransformation: photo(projectTransformation, 'Paved path leading to a circular patio with a table and chairs'),
   manifestoDesign: photo(manifestoDesign, 'Striped lawn between a deep flower border and a clipped yew hedge'),
   manifestoBuild: photo(manifestoBuild, 'A circular paver patio being laid on a sand bed'),

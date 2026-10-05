@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { photos } from '../data/images'
+import { useIsDesktop } from '../hooks/useMediaQuery'
 import './Statement.css'
 
 /** Full-bleed visual statement: a framed image opens out to fill the screen
@@ -14,8 +15,10 @@ export function Statement() {
   const clipPath = useTransform([inset, sideInset], ([v, h]) => `inset(${v}% ${h}% ${v}% ${h}%)`)
   const scale = useTransform(scrollYProgress, [0, 0.6, 1], [1.14, 1.03, 1])
   const y = useTransform(scrollYProgress, [0, 1], ['-3%', '4%'])
-  const lineOneX = useTransform(scrollYProgress, [0.2, 1], ['14%', '-4%'])
-  const lineTwoX = useTransform(scrollYProgress, [0.2, 1], ['-14%', '4%'])
+  // Lines drift in from opposite sides; gentler on small screens.
+  const drift = useIsDesktop() ? 14 : 5
+  const lineOneX = useTransform(scrollYProgress, [0.2, 1], [`${drift}%`, `${-drift / 3}%`])
+  const lineTwoX = useTransform(scrollYProgress, [0.2, 1], [`${-drift}%`, `${drift / 3}%`])
   const textOpacity = useTransform(scrollYProgress, [0.26, 0.46], [0, 1])
 
   return (

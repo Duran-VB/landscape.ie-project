@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { navLinks, site } from '../data/site'
 import { setScrollLocked } from '../lib/scroll'
 import { ArrowRight, Phone, Stars } from './ui/Icons'
-import { EASE_EXPO } from './ui/Motion'
+import { EASE_EXPO } from './ui/easing'
 import './Navbar.css'
 
 export function Navbar() {

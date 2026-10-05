@@ -51,7 +51,7 @@
 .footer__wordmark {
   margin: clamp(56px, 8vw, 120px) 0 clamp(20px, 3vw, 40px);
   font-family: var(--font-display);
-  font-size: clamp(3rem, 14.2vw, 16.5rem);
+  font-size: clamp(2.8rem, 16.6vw, 24rem);
   line-height: 0.8;
   letter-spacing: -0.02em;
   white-space: nowrap;

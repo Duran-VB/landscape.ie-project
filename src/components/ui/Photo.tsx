@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import type { Photo as PhotoData } from '../../data/images'
-import { EASE_EXPO } from './Motion'
+import { EASE_EXPO } from './easing'
 
 type Props = {
   photo: PhotoData

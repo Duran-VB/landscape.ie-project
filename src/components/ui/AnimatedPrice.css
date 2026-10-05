@@ -11,12 +11,6 @@
 .price__digits {
   display: inline-flex;
   align-items: flex-end;
-  transition: color 0.9s var(--ease-out);
-}
-
-.price__digits.is-changed {
-  color: var(--forest);
-  transition-duration: 0.2s;
 }
 
 .price__sym {

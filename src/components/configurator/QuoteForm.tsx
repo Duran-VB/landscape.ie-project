@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { formatEuro, type Selections } from '../../data/pricing'
 import { setScrollLocked } from '../../lib/scroll'
 import { ArrowRight, Check, Close, Upload } from '../ui/Icons'
-import { EASE_EXPO } from '../ui/Motion'
+import { EASE_EXPO } from '../ui/easing'
 import { DISCLAIMER } from './PriceSummary'
 import { describeSelections } from './summary'
 import './QuoteForm.css'
@@ -48,7 +48,9 @@ export function QuoteForm({ open, onClose, selections, total }: { open: boolean;
 
   // Open / close housekeeping: scroll lock, focus, Escape.
   const closeRef = useRef(onClose)
-  closeRef.current = onClose
+  useEffect(() => {
+    closeRef.current = onClose
+  })
   useEffect(() => {
     if (!open) return
     returnFocus.current = document.activeElement as HTMLElement
@@ -68,7 +70,9 @@ export function QuoteForm({ open, onClose, selections, total }: { open: boolean;
 
   // Release object URLs when photos are removed or the form unmounts.
   const photosRef = useRef(photos)
-  photosRef.current = photos
+  useEffect(() => {
+    photosRef.current = photos
+  })
   useEffect(() => () => photosRef.current.forEach((p) => URL.revokeObjectURL(p.url)), [])
 
   const set = (field: keyof Values) => (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>

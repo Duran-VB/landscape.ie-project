@@ -3,7 +3,8 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import { photos } from '../data/images'
 import { site } from '../data/site'
 import { ArrowDown, ArrowRight, Star } from './ui/Icons'
-import { EASE_EXPO, MaskLines } from './ui/Motion'
+import { MaskLines } from './ui/Motion'
+import { EASE_EXPO } from './ui/easing'
 import './Hero.css'
 
 export function Hero() {
